@@ -1,30 +1,34 @@
 import { twMerge } from 'tailwind-merge';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import Header from './Header';
+import Card from './Card';
 
 /**
- * Section Title with View All Link
+ * ContentRow — 섹션 타이틀 + 카드 리스트
+ *
+ * items 배열: [{ id, title, image, size }]
+ * items 없이 children만 넣어도 동작
  */
-export default function ContentRow({ title, showViewAll = true, viewAllLink = "#", className, children }) {
+export default function ContentRow({ title, items, showViewAll = true, viewAllLink = '#', className, children }) {
   return (
     <div className={twMerge('w-full flex flex-col gap-7', className)}>
-      <div className="flex items-center justify-between w-full max-w-[1200px]">
-        <h2 className="text-4xl font-black text-[#44433f] tracking-tight leading-[48px]">
-          {title}
-        </h2>
-        {showViewAll && (
-          <a 
-            href={viewAllLink} 
-            className="flex items-center gap-1 text-lg font-bold text-[#44433f] hover:opacity-70 transition-opacity font-poppins"
-          >
-            <span>더보기</span>
-            <FontAwesomeIcon icon={faChevronRight} className="text-[10px]" />
-          </a>
-        )}
-      </div>
-      <div className="w-full">
-        {children}
-      </div>
+
+      <Header title={title} showViewAll={showViewAll} viewAllLink={viewAllLink} />
+
+      {items ? (
+        <div className="flex gap-6 overflow-x-auto overflow-y-hidden pb-2 max-w-[1200px]">
+          {items.map((item) => (
+            <Card
+              key={item.id}
+              image={item.image}
+              title={item.title}
+              size={item.size || 'sm'}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="w-full">{children}</div>
+      )}
+
     </div>
   );
 }
