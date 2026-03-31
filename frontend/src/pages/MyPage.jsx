@@ -25,11 +25,11 @@ export default function MyPage() {
             <p className="text-gray-400 text-xl font-medium">루키즈와 함께한 지 <span className="text-primary-500 font-bold">128일</span>째예요!</p>
             <div className="flex gap-4 mt-2">
               <div className="bg-white px-6 py-3 rounded-2xl shadow-sm flex items-center gap-3">
-                <FontAwesomeIcon icon={faStar} className="text-primary-500" />
+                <FontAwesomeIcon icon={faStar} className="text-primary-500 text-xl" />
                 <span className="font-bold">포인트 2,450P</span>
               </div>
               <div className="bg-white px-6 py-3 rounded-2xl shadow-sm flex items-center gap-3">
-                <FontAwesomeIcon icon={faAward} className="text-secondary-500" />
+                <FontAwesomeIcon icon={faAward} className="text-secondary-500 text-xl" />
                 <span className="font-bold">베스트 탐험가</span>
               </div>
             </div>
@@ -48,7 +48,7 @@ export default function MyPage() {
                  <h2 className="text-[36px] font-black text-blue-900 leading-tight">이번 주<br />성장 리포트</h2>
                  <p className="text-blue-700/60 text-lg font-bold">승아의 창의력이 쑥쑥 자라고 있어요!</p>
                </div>
-               <div className="size-20 bg-white rounded-3xl flex items-center justify-center text-blue-500 text-3xl shadow-sm">
+               <div className="size-24 bg-white rounded-3xl flex items-center justify-center text-blue-500 text-4xl shadow-sm">
                  <FontAwesomeIcon icon={faChartLine} />
                </div>
              </div>
@@ -61,7 +61,7 @@ export default function MyPage() {
              </div>
           </div>
           <div className="col-span-4 bg-orange-50 rounded-[48px] p-12 flex flex-col gap-6 items-center justify-center text-center group cursor-pointer hover:shadow-xl transition-all">
-             <div className="size-32 bg-white rounded-full shadow-lg flex items-center justify-center text-orange-500 text-5xl group-hover:scale-110 transition-transform">
+             <div className="size-24 bg-white rounded-full shadow-lg flex items-center justify-center text-orange-500 text-4xl group-hover:scale-110 transition-transform">
                <FontAwesomeIcon icon={faAward} />
              </div>
              <div className="flex flex-col gap-2">
