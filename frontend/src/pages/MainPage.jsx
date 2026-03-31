@@ -67,7 +67,6 @@ export default function MainPage() {
         {/* Sections */}
         <div className="flex flex-col gap-10 pb-20">
           
-          {/* 이어보기 */}
           <ContentRow title="이어보기" className="px-10">
             <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
               {[1, 2, 3, 4].map(i => (
