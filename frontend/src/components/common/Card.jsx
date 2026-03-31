@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge';
 /**
  * Content Card Component
  */
-export default function Card({ title, image, size = 'md', className, children }) {
+export default function Card({ title, image, size = 'md', className, children, onClick }) {
   const sizeStyles = {
     lg: 'w-full aspect-[2/1] rounded-4xl p-10',
     md: 'w-full aspect-[4/3] rounded-3xl p-6',
@@ -18,6 +18,7 @@ export default function Card({ title, image, size = 'md', className, children })
 
   return (
     <div 
+      onClick={onClick}
       className={twMerge(
         'relative overflow-hidden bg-gray-100 shadow-sm cursor-pointer hover:shadow-md transition-shadow group',
         sizeStyles[size],
