@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Nav from '../components/common/Nav';
 import Footer from '../components/common/Footer';
 import AgeButton from '../components/common/AgeButton';
@@ -5,6 +7,7 @@ import ContentRow from '../components/common/ContentRow';
 import Card from '../components/common/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faPlay, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import { fetchTrending, fetchKidsMovies, getImageUrl } from '../api/tmdb';
 
 // Figma Asset URLs
 const ASSETS = {
@@ -17,6 +20,15 @@ const ASSETS = {
 };
 
 export default function MainPage() {
+  const [trending, setTrending] = useState([]);
+  const [kidsMovies, setKidsMovies] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchTrending().then(setTrending).catch(console.error);
+    fetchKidsMovies().then(setKidsMovies).catch(console.error);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white flex flex-col items-center">
       <Nav activeTab="main" />
@@ -86,16 +98,24 @@ export default function MainPage() {
             </div>
           </ContentRow>
 
-          {/* 루의 추천 - Grid matching 264:715 */}
+          {/* 루의 추천 - 주간 트렌딩 */}
           <ContentRow title="루의 추천" className="px-10">
             <div className="grid grid-cols-4 grid-rows-2 gap-10 h-[580px]">
-              <div className="col-span-2 row-span-2">
-                <Card size="lg" title="신비한 과학이야기" image={ASSETS.science} className="h-full" />
-              </div>
-              <Card size="sm" title="신비한 과학이야기" image={ASSETS.science} />
-              <Card size="sm" title="신비한 과학이야기" image={ASSETS.science} />
-              <Card size="sm" title="신비한 과학이야기" image={ASSETS.science} />
-              <Card size="sm" title="신비한 과학이야기" image={ASSETS.science} />
+              {trending.slice(0, 5).map((item, i) => (
+                <div key={item.id} className={i === 0 ? 'col-span-2 row-span-2' : ''}>
+                  <Card
+                    size={i === 0 ? 'lg' : 'sm'}
+                    title={item.title || item.name}
+                    image={getImageUrl(item.poster_path)}
+                    className={i === 0 ? 'h-full' : ''}
+                    onClick={() => navigate(`/movie/${item.id}`)}
+                  >
+                    <span className="text-sm font-semibold text-yellow-400 mt-1">
+                      ★ {item.vote_average?.toFixed(1)}
+                    </span>
+                  </Card>
+                </div>
+              ))}
             </div>
           </ContentRow>
 
@@ -113,14 +133,27 @@ export default function MainPage() {
             </div>
           </ContentRow>
 
-          {/* 인기 콘텐츠 */}
+          {/* 인기 콘텐츠 - 키즈 영화 */}
           <ContentRow title="인기 콘텐츠" className="px-10">
             <div className="grid grid-cols-4 gap-10">
-              {[1, 2, 3, 4].map(i => (
-                <div key={i} className="h-[360px] rounded-[50px] overflow-hidden relative group cursor-pointer shadow-sm">
-                  <img src={ASSETS.science} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+              {kidsMovies.slice(0, 4).map((movie) => (
+                <div 
+                  key={movie.id} 
+                  className="h-[360px] rounded-[50px] overflow-hidden relative group cursor-pointer shadow-sm"
+                  onClick={() => navigate(`/movie/${movie.id}`)}
+                >
+                  <img
+                    src={getImageUrl(movie.poster_path)}
+                    alt={movie.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-6 left-6 text-white text-[21px] font-black">신비한 과학이야기</div>
+                  <div className="absolute bottom-6 left-6 right-4 text-white text-[21px] font-black leading-snug line-clamp-2">
+                    {movie.title}
+                  </div>
+                  <div className="absolute top-4 right-4 bg-black/50 text-yellow-400 text-sm font-bold px-2 py-1 rounded-full">
+                    ★ {movie.vote_average?.toFixed(1)}
+                  </div>
                 </div>
               ))}
             </div>

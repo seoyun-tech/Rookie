@@ -1,4 +1,5 @@
 import { twMerge } from 'tailwind-merge';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faBell, faHome, faStar, faUser, faChevronDown, faLeaf } from '@fortawesome/free-solid-svg-icons';
 
@@ -66,12 +67,17 @@ function NavProfile({ name = "최승아", zone = "키즈존 4~7세" }) {
  * Main Navigation Component
  */
 export default function Nav({ activeTab = "main" }) {
+  const navigate = useNavigate();
+
   return (
     <nav className="sticky top-0 z-50 w-full h-[120px] bg-white/80 backdrop-blur-md shadow-sm flex items-center justify-center px-10">
       <div className="w-full max-w-[1200px] flex items-center justify-between">
         
         {/* Left: Logo */}
-        <div className="flex items-center p-[27px] select-none cursor-pointer">
+        <div 
+          className="flex items-center p-[27px] select-none cursor-pointer"
+          onClick={() => navigate('/')}
+        >
           <span className="text-[54px] font-black tracking-tight leading-none uppercase font-sans">
             <span className="text-[#3d2200]">Roo</span>
             <span className="text-[#ffc633]">KIZ</span>
@@ -80,18 +86,36 @@ export default function Nav({ activeTab = "main" }) {
 
         {/* Center: Nav Buttons */}
         <div className="flex items-center gap-[18px]">
-          <NavButton icon={faHome} label="메인" active={activeTab === "main"} />
-          <NavButton icon={faStar} label="내 친구 루" active={activeTab === "airon"} />
-          <NavButton icon={faUser} label="마이 페이지" active={activeTab === "mypage"} />
+          <NavButton 
+            icon={faHome} 
+            label="메인" 
+            active={activeTab === "main"} 
+            onClick={() => navigate('/')}
+          />
+          <NavButton 
+            icon={faStar} 
+            label="내 친구 루" 
+            active={activeTab === "airon"} 
+            onClick={() => navigate('/airon')}
+          />
+          <NavButton 
+            icon={faUser} 
+            label="마이 페이지" 
+            active={activeTab === "mypage"} 
+            onClick={() => navigate('/mypage')}
+          />
         </div>
 
         {/* Right: Actions */}
         <div className="flex items-center gap-1.5">
-          <button className="size-[38px] bg-gray-50 rounded-full flex items-center justify-center cursor-pointer transition-colors overflow-hidden">
+          <button 
+            className="size-[38px] bg-gray-50 rounded-full flex items-center justify-center cursor-pointer transition-colors overflow-hidden"
+            onClick={() => navigate('/search')}
+          >
             <img src={NAV_ASSETS.search} className="size-[15px]" alt="search" />
           </button>
           <button className="size-[38px] bg-gray-50 rounded-full flex items-center justify-center cursor-pointer transition-colors relative overflow-hidden">
-            <img src="https://www.figma.com/api/mcp/asset/eef3f84d-05be-41d1-b5d5-2b96ea972da0" className="size-[18px]" alt="bell" />
+            <img src="https://www.figma.com/api/mcp/asset/eef3f84d-05be-41d5-b5d5-2b96ea972da0" className="size-[18px]" alt="bell" />
             <div className="absolute top-2 right-2 size-[8px] bg-secondary-400 rounded-full" />
           </button>
           <div className="ml-1">
