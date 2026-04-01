@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Nav from "../components/common/Nav";
-import Footer from "../components/common/Footer";
-import AgeButton from "../components/common/AgeButton";
-import ContentRow from "../components/common/ContentRow";
-import Card from "../components/common/Card";
-import CharacterRow from "../components/common/CharacterRow";
-import CharacterCard from "../components/common/CharacterCard";
-import AiRoo from "../components/common/AiRoo";
+import { useNavigate } from "react-router";
+import { Nav } from "../components/common/Nav";
+import { Footer } from "../components/common/Footer";
+import { AgeButton } from "../components/common/AgeButton";
+import { ContentRow } from "../components/common/ContentRow";
+import { Card } from "../components/common/Card";
+import { CharacterRow } from "../components/common/CharacterRow";
+import { CharacterCard } from "../components/common/CharacterCard";
+import { AiRoo } from "../components/common/AiRoo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStar,
@@ -63,7 +63,7 @@ export default function MainPage() {
                 신규
               </span>
             </div>
-            <h1 className="text-2xl md:text-4xl lg:text-[60px] font-black md:leading-[60px] font-poppins">
+            <h1 className="text-2xl md:text-4xl lg:text-6xl font-black md:leading-10 font-poppins">
               슈퍼 히어로 특공대!
             </h1>
             <div className="text-sm md:text-lg font-medium text-white/80 leading-snug md:leading-7">

@@ -1,9 +1,12 @@
 import { twMerge } from 'tailwind-merge';
 import { useNavigate } from 'react-router';
-import { Icon } from '@iconify/react';
-import logoSvg from '../../LOGO.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faHouse, faRobot, faUser, faMagnifyingGlass,
+  faBell, faLeaf, faChevronDown
+} from '@fortawesome/free-solid-svg-icons';
 
-function NavButton({ iconName, label, active = false, onClick }) {
+function NavButton({ icon, label, active = false, onClick }) {
   return (
     <button
       onClick={onClick}
@@ -12,8 +15,8 @@ function NavButton({ iconName, label, active = false, onClick }) {
         active ? 'bg-primary-500' : 'bg-gray-50 hover:bg-gray-100'
       )}
     >
-      <Icon
-        icon={iconName}
+      <FontAwesomeIcon
+        icon={icon}
         className={twMerge(
           'text-[22px] md:text-[26px]',
           active ? 'text-primary-950' : 'text-gray-300'
@@ -33,23 +36,23 @@ function NavProfile({ name = "최승아", zone = "키즈존 4~7세" }) {
   return (
     <button className="flex items-center h-[44px] w-fit md:w-[150px] bg-gray-50 rounded-full px-2.5 gap-2 hover:bg-gray-100 transition-colors cursor-pointer border-none outline-none">
       <div className="size-6 bg-primary-200 rounded-full flex items-center justify-center shrink-0">
-        <Icon icon="mingcute:user-4-fill" className="text-[14px] text-primary-700" />
+        <FontAwesomeIcon icon={faUser} className="text-[14px] text-primary-700" />
       </div>
       <div className="hidden md:flex flex-col items-start leading-tight overflow-hidden text-left">
         <div className="flex items-center gap-1">
           <span className="text-sm font-bold text-gray-700 whitespace-nowrap">{name}</span>
-          <Icon icon="mingcute:leaf-fill" className="text-[14px] text-green-500" />
+          <FontAwesomeIcon icon={faLeaf} className="text-[14px] text-green-500" />
         </div>
         <span className="text-[12px] font-bold text-green-600 whitespace-nowrap">{zone}</span>
       </div>
       <div className="ml-auto hidden md:block">
-        <Icon icon="mingcute:down-small-fill" className="text-[14px] text-gray-400" />
+        <FontAwesomeIcon icon={faChevronDown} className="text-[14px] text-gray-400" />
       </div>
     </button>
   );
 }
 
-export default function Nav({ activeTab = "main" }) {
+export function Nav({ activeTab = "main" }) {
   const navigate = useNavigate();
 
   return (
@@ -61,25 +64,25 @@ export default function Nav({ activeTab = "main" }) {
           className="flex items-center select-none cursor-pointer"
           onClick={() => navigate('/')}
         >
-          <img src={logoSvg} alt="ROOKIZ" className="h-8 md:h-16 w-auto" />
+          <img src="/LOGO.svg" alt="ROOKIZ" className="h-8 md:h-16 w-auto" />
         </div>
 
         {/* Center: Nav Buttons */}
         <div className="flex items-center justify-center gap-2 md:gap-4">
           <NavButton
-            iconName="mingcute:home-4-fill"
+            icon={faHouse}
             label="메인"
             active={activeTab === "main"}
             onClick={() => navigate('/')}
           />
           <NavButton
-            iconName="mingcute:ai-fill"
+            icon={faRobot}
             label="내 친구 루"
             active={activeTab === "airon"}
             onClick={() => navigate('/airon')}
           />
           <NavButton
-            iconName="mingcute:contacts-fill"
+            icon={faUser}
             label="마이 페이지"
             active={activeTab === "mypage"}
             onClick={() => navigate('/mypage')}
@@ -92,11 +95,11 @@ export default function Nav({ activeTab = "main" }) {
             className="size-[38px] bg-gray-50 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-100 transition-colors"
             onClick={() => navigate('/search')}
           >
-            <Icon icon="mingcute:search-2-fill" className="text-[18px] text-gray-400" />
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="text-[18px] text-gray-400" />
           </button>
           <button className="size-[38px] bg-gray-50 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-100 transition-colors relative">
-            <Icon icon="mingcute:notification-fill" className="text-[18px] text-gray-400" />
-            <div className="absolute top-[9px] right-[9px] size-2 bg-[#ff9589] rounded-full" />
+            <FontAwesomeIcon icon={faBell} className="text-[18px] text-gray-400" />
+            <div className="absolute top-[9px] right-[9px] size-2 bg-secondary-400 rounded-full" />
           </button>
           <div className="ml-1">
             <NavProfile />

@@ -1,8 +1,8 @@
-import Nav from '../components/common/Nav';
-import Footer from '../components/common/Footer';
-import Searchbar from '../components/common/Searchbar';
-import ContentRow from '../components/common/ContentRow';
-import Card from '../components/common/Card';
+import { Nav } from '../components/common/Nav';
+import { Footer } from '../components/common/Footer';
+import { Searchbar } from '../components/common/Searchbar';
+import { ContentRow } from '../components/common/ContentRow';
+import { Card } from '../components/common/Card';
 
 export default function SearchPage() {
   return (

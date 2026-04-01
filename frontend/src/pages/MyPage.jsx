@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Nav from '../components/common/Nav';
-import Footer from '../components/common/Footer';
-import ContentRow from '../components/common/ContentRow';
-import Card from '../components/common/Card';
+import { Nav } from '../components/common/Nav';
+import { Footer } from '../components/common/Footer';
+import { ContentRow } from '../components/common/ContentRow';
+import { Card } from '../components/common/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUser, faStar, faShield, faChartLine, faAward,
@@ -27,8 +27,7 @@ export default function MyPage() {
         
         {/* Profile Section */}
         <section
-          className="relative rounded-3xl border-b border-[#f0f0f0] p-10 overflow-hidden"
-          style={{ background: 'linear-gradient(168deg, #fafafa 0%, #fff9e6 100%)' }}
+          className="relative rounded-3xl border-b border-gray-100 p-10 overflow-hidden bg-linear-[168deg] from-white to-primary-100"
         >
           <div className="flex flex-col gap-5 items-center">
 
@@ -79,13 +78,13 @@ export default function MyPage() {
 
         {/* 칭찬 하루 Section */}
         <section className="flex flex-col gap-7">
-          <h2 className="text-4xl font-extrabold text-[#44433f]">칭찬 하루</h2>
+          <h2 className="text-4xl font-extrabold text-gray-800">칭찬 하루</h2>
           <div className="flex flex-wrap gap-x-[50px] gap-y-[46px]">
             {stickers.map((active, i) => (
               <button
                 key={i}
                 onClick={() => toggleSticker(i)}
-                className={`w-[200px] h-[100px] rounded-full border-[2.7px] flex items-center justify-center cursor-pointer transition-all duration-300
+                className={`w-[200px] h-[100px] rounded-full border-2 flex items-center justify-center cursor-pointer transition-all duration-300
                   ${active
                     ? 'bg-primary-100 border-primary-400 hover:scale-105 hover:shadow-md'
                     : 'bg-white border-gray-300 hover:scale-105 hover:border-primary-300'

@@ -1,7 +1,7 @@
 /**
  * CharacterCard — 캐릭터 이미지 + 이름
  */
-export default function CharacterCard({ name, image, onClick }) {
+export function CharacterCard({ name, image, onClick }) {
   return (
     <div
       className="flex flex-col items-center gap-2 md:gap-3 shrink-0 cursor-pointer group"

@@ -26,7 +26,7 @@ function BackBtn({ onClick }) {
     <button
       onClick={onClick}
       aria-label="뒤로가기"
-      className="flex items-center justify-center size-[38px] rounded-full bg-[rgba(28,28,28,0.6)] hover:bg-[rgba(28,28,28,0.8)] transition-colors shrink-0"
+      className="flex items-center justify-center size-[38px] rounded-full bg-gray-950/60 hover:bg-gray-950/80 transition-colors shrink-0"
     >
       <img src={ICONS.back} alt="" className="size-[21px] object-contain" />
     </button>
@@ -42,7 +42,7 @@ function CtrlBtn({ icon, iconSize = 17, size = 38, onClick, className }) {
     <button
       onClick={onClick}
       className={twMerge(
-        "flex items-center justify-center rounded-full bg-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.22)] transition-colors shrink-0",
+        "flex items-center justify-center rounded-full bg-white/12 hover:bg-white/22 transition-colors shrink-0",
         className
       )}
       style={{ width: size, height: size }}
@@ -93,7 +93,7 @@ function SkipBtn({ onClick }) {
   return (
     <button
       onClick={onClick}
-      className="h-[27px] px-[13px] rounded-xl flex items-center justify-center bg-[rgba(28,28,28,0.6)] hover:bg-[rgba(28,28,28,0.8)] transition-colors"
+      className="h-[27px] px-[13px] rounded-xl flex items-center justify-center bg-gray-950/60 hover:bg-gray-950/80 transition-colors"
     >
       <span className="text-white font-extrabold text-sm font-sans leading-5 whitespace-nowrap">
         건너뛰기
@@ -154,7 +154,7 @@ function ProgressBar({ played, duration, onSeek }) {
  *   onBack      뒤로가기 버튼 콜백
  *   className   감싸는 div에 추가할 클래스
  */
-export default function VideoPlayer({ youtubeKey, poster, title, subtitle, onBack, className }) {
+export function VideoPlayer({ youtubeKey, poster, title, subtitle, onBack, className }) {
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
   const [played, setPlayed] = useState(0);
@@ -209,13 +209,7 @@ export default function VideoPlayer({ youtubeKey, poster, title, subtitle, onBac
       )}
 
       {/* 그라디언트 오버레이 */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.8) 100%)",
-        }}
-      />
+      <div className="absolute inset-0 pointer-events-none bg-linear-[180deg] from-black/55 via-transparent to-black/80" />
 
       {/* ── 컨트롤 레이어 ── */}
       {ctrlVisible && (

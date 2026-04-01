@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge';
 /**
  * Content Card Component
  */
-export default function Card({ title, image, size = 'md', className, children, onClick }) {
+export function Card({ title, image, size = 'md', className, children, onClick }) {
   const sizeStyles = {
     lg: 'w-full aspect-[2/1] rounded-4xl p-10',
     md: 'w-full aspect-[4/3] rounded-3xl p-6',
@@ -11,9 +11,9 @@ export default function Card({ title, image, size = 'md', className, children, o
   };
 
   const titleStyles = {
-    lg: 'text-2xl md:text-5xl font-black md:leading-[60px] font-sans',
-    md: 'text-xl md:text-4xl font-extrabold md:leading-[48px] font-sans',
-    sm: 'text-lg md:text-2xl font-bold md:leading-[36px] font-sans',
+    lg: 'text-2xl md:text-5xl font-black md:leading-10 font-sans',
+    md: 'text-xl md:text-4xl font-extrabold md:leading-8 font-sans',
+    sm: 'text-lg md:text-2xl font-bold md:leading-6 font-sans',
   };
 
   return (

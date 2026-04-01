@@ -7,7 +7,7 @@ import { faMagnifyingGlass, faMicrophone } from '@fortawesome/free-solid-svg-ico
  * @param {string} placeholder - Input placeholder
  * @param {function} onSearch - Search callback
  */
-export default function Searchbar({ placeholder = "제목, 장르, 캐릭터 검색...", onSearch, className }) {
+export function Searchbar({ placeholder = "제목, 장르, 캐릭터 검색...", onSearch, className }) {
   return (
     <div 
       className={twMerge(

@@ -1,21 +1,10 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router';
-import MainPage from './pages/MainPage';
-import SearchPage from './pages/SearchPage';
-import MyPage from './pages/MyPage';
-import DetailPage from './pages/DetailPage';
+import { Outlet } from "react-router";
 
-export function App() {
-  return (
-    <Router>
-      <div className="relative">
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/movie/:movieId" element={<DetailPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </div>
-    </Router>
-  );
+/**
+ * App — API / 컴포넌트 브릿지
+ * 공용 상태, 전역 컨텍스트, 공통 레이아웃을 여기서 제공하고
+ * 각 페이지는 <Outlet />으로 렌더링된다.
+ */
+export default function App() {
+  return <Outlet />;
 }
