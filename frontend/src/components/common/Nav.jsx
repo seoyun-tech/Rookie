@@ -5,7 +5,6 @@ import {
   faHouse, faRobot, faUser, faMagnifyingGlass,
   faBell, faLeaf, faChevronDown
 } from '@fortawesome/free-solid-svg-icons';
-import logoSvg from '../../LOGO.svg';
 
 function NavButton({ icon, label, active = false, onClick }) {
   return (
@@ -65,7 +64,7 @@ export function Nav({ activeTab = "main" }) {
           className="flex items-center select-none cursor-pointer"
           onClick={() => navigate('/')}
         >
-          <img src={logoSvg} alt="ROOKIZ" className="h-8 md:h-16 w-auto" />
+          <img src="/LOGO.svg" alt="ROOKIZ" className="h-8 md:h-16 w-auto" />
         </div>
 
         {/* Center: Nav Buttons */}
