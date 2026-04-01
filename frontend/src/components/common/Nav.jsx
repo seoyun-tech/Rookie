@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faBell, faHome, faStar, faUser, faChevronDown, faLeaf } from '@fortawesome/free-solid-svg-icons';
 
