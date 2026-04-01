@@ -33,7 +33,7 @@ jobs:
         with:
           python-version: "3.11"  # Python 3.11버전 사용
       - run: pip install -r requirements.txt  # fastapi, uvicorn, requests, python-dotenv 설치
-      - run: python -m py_compile app/main.py  # main.py 문법 오류 검사
+      - run: python -m py_compile main.py  # main.py 문법 오류 검사
       
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}  # GitHub Secrets에서 HF 토큰 주입
