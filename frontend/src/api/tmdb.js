@@ -1,4 +1,5 @@
 import api from './axios';
+import axios from 'axios';
 
 export const getImageUrl = (path, size = 'w500') => {
   if (!path) return "";
@@ -15,15 +16,10 @@ export const fetchTrending = async () => {
   }
 };
 
+// ✅ 백엔드 경유로 변경 (키 숨김 + 7세 이하 필터)
 export const fetchKidsMovies = async () => {
   try {
-    // 키즈 친화적인 장르 (애니메이션: 16, 가족: 10751)
-    const response = await api.get('discover/movie', {
-      params: {
-        with_genres: '16,10751',
-        sort_by: 'popularity.desc'
-      }
-    });
+    const response = await axios.get('http://localhost:8000/api/kids/recommend');
     return response.data.results;
   } catch (error) {
     console.error("Error fetching kids movies:", error);
