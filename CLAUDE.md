@@ -1,5 +1,65 @@
 # CLAUDE.md — 루키즈 (Rookids) 키즈 OTT 서비스
 
+## 규칙 (최우선 적용)
+
+1. **한국어로만 응답** (영어 응답 금지)
+2. **식별자는 짧게** 작성
+3. **단계별로 작업 수행** (한 번에 하나씩)
+
+---
+
+## 프론트엔드 코딩 규칙 (반드시 준수)
+
+### 언어 & 라이브러리
+- 파일 확장자는 `.jsx` / `.js` — TypeScript 사용 금지
+- 아이콘은 `@fortawesome/react-fontawesome` + `@fortawesome/free-solid-svg-icons` 사용 (`@iconify` 금지)
+- React Router v7 **data API** 문법 준수: `react-router`에서 import, `createBrowserRouter` + `RouterProvider` 사용
+  - `<BrowserRouter>`, `<Routes>`, `<Route>` 구식 패턴 사용 금지
+- 라우터 설정(`createBrowserRouter`)은 `main.jsx`에서 정의하고 `RouterProvider`를 직접 렌더링한다
+- `App.jsx`는 API·컴포넌트 브릿지 역할: `<Outlet />`으로 자식 라우트를 렌더링하며, 전역 상태·컨텍스트·공통 레이아웃은 여기서 제공한다
+
+### Export 규칙
+- `src/components/common/` 하위 컴포넌트는 **named export** 사용 (`export function Foo`)
+  - `export default` 금지
+  - import 시 반드시 중괄호 사용: `import { Nav } from '../components/common/Nav'`
+- 페이지(`src/pages/`) 및 기타 파일은 `export default function` 사용
+- barrel 파일(`index.js`, `index.jsx`) 생성 금지
+
+### Tailwind CSS v4
+- **v4 전용 문법만 사용** — v3 하위 호환 고려 안 함
+- 디자인 토큰 소스: `/token/*.json` (Figma Variables 원본)
+- 테마 토큰은 `frontend/src/styles/tokens.css`의 `@theme` 블록으로 관리 (`tailwind.config.js` 무시)
+- **하드코딩 금지**: hex 색상(`#xxxxxx`), rgba 값 직접 입력 금지
+- **유틸리티 클래스 우선**: 디자인 토큰에 있는 색상·크기는 반드시 클래스로 표현
+  - 불투명도 조합: `bg-gray-950/60`, `bg-white/12` 등
+  - 그라디언트: `bg-linear-[각도] from-* to-*`
+  - 토큰에 없는 값 처리 순서:
+    1. `@theme` 블록에 토큰 선언 후 유틸리티 클래스 사용
+    2. CSS 변수(`--var-name`)로 선언 후 `var()` 참조
+    3. 위 두 방법이 불가한 경우에만 arbitrary 값 `[]` 허용
+- `tailwind-merge`로 클래스 충돌 방지
+
+### CSS 파일 구조
+- 모든 CSS 파일은 `src/styles/` 폴더에서 관리
+  - `src/styles/index.css` — 폰트 import, Tailwind, base 스타일
+  - `src/styles/tokens.css` — `@theme` 디자인 토큰
+- `main.jsx`에서 `import "./styles/index.css"` 로 진입
+- 폰트는 HTML `<link>` 금지 — 반드시 `index.css`의 `@import url(...)` 방식으로 로드
+
+### 폰트
+- 폰트 로드: `src/styles/index.css` 상단 `@import url(...)` (HTML `<link>` 금지)
+- Pretendard: `pretendardvariable.min.css` CDN import
+- Poppins: Google Fonts CDN import
+- 폰트 패밀리 토큰은 `--font-*` 명명 (`--font-family-*` 금지 — v4에서 유틸리티 클래스 미생성)
+  - `--font-sans`: Pretendard 전체 폴백 스택
+  - `--font-poppins`: Poppins
+
+### 타이포그래피 토큰 구조
+- 텍스트 크기는 `--text-*` + `--text-*--line-height` 쌍으로 선언 (자동 line-height 적용)
+- 독립 line-height 클래스: `leading-2`(20px) / `leading-4`(28px) / `leading-6`(36px) / `leading-8`(48px) / `leading-10`(60px)
+
+---
+
 ## 프로젝트 개요
 
 **프로젝트명:** 루키즈 (Rookids) — 만 13세 미만 아이들을 위한 OTT 서비스
@@ -92,11 +152,3 @@ monorepo/
 - API 호출은 Axios + TMDB API 기준으로 통일
 - FastAPI 엔드포인트 변경 시 프론트/백 동시 확인
 - 코드 생성 후 반드시 동작 확인 후 다음 단계로 진행
-
----
-
-## 규칙
-
-1. **한국어로만 응답** (영어 응답 금지)
-2. **식별자는 짧게** 작성
-3. **단계별로 작업 수행** (한 번에 하나씩)

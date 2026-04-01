@@ -12,6 +12,8 @@ Claude Code 전용 스킬이다.
 
 - Figma MCP 서버가 `.mcp.json`에 연결되어 있어야 한다
 - React 19 + Tailwind CSS v4 프로젝트가 이미 셋업되어 있어야 한다
+- 디자인 토큰 소스: `/token/*.json` (Figma Variables 원본)
+- 테마 파일: `frontend/src/styles/tokens.css` (`@theme` 블록)
 
 사용자가 사용법을 물으면 `references/GUIDE.md`를 읽어서 안내한다.
 
@@ -116,7 +118,7 @@ Figma:get_design_context
 
 #### 1-D. 디자인 토큰 수집
 
-`Figma:get_variable_defs`로 Variables를 가져온다.
+`/token/*.json` 파일이 있으면 먼저 읽는다. 없으면 `Figma:get_variable_defs`로 Variables를 가져온다.
 
 ```
 Figma:get_variable_defs
@@ -126,7 +128,7 @@ Figma:get_variable_defs
   clientLanguages: "javascript"
 ```
 
-Variables가 없거나 빈약할 수 있다(사용자의 Figma 숙련도가 낮으므로). 이 경우 `get_design_context`에서 추출한 실제 색상·폰트 값을 기반으로 토큰을 직접 정의한다.
+토큰이 없거나 빈약할 수 있다(사용자의 Figma 숙련도가 낮으므로). 이 경우 `get_design_context`에서 추출한 실제 색상·폰트 값을 기반으로 토큰을 직접 정의한다.
 
 ### Phase 2 — 컴포넌트 설계
 
@@ -162,19 +164,17 @@ Figma 레이어:            →  React 컴포넌트:
 ## 컴포넌트 분해 계획
 
 ### 페이지: HomePage
-구성: <Header /> → <HeroBanner /> → <SectionTitle /> + <CardGrid /> (×3) → <Footer />
+구성: <Nav /> → <HeroBanner /> → <ContentRow /> (×3) → <Footer />
 
 ### 공통 컴포넌트
 | 컴포넌트 | 역할 | props | Figma 출처 |
 |----------|------|-------|------------|
 | Card | 영화/콘텐츠 카드 | img, title, rating, href | 인기영화카드, MovieCard-v2, 최신작_아이템 통합 |
-| SectionTitle | 섹션 제목 | title, moreHref | "인기 영화" 제목 영역 |
 | ...  | ... | ... | ... |
 
-### @theme 토큰
---color-primary: #E50914
---color-bg: #141414
---font-body: "Pretendard", sans-serif
+### @theme 토큰 추가 예정
+--color-primary-500: #FFC633
+--font-sans: Pretendard 스택
 ```
 
 사용자가 수정을 요청하면 계획을 갱신한 뒤 다음 단계로 진행한다.
@@ -185,25 +185,52 @@ Figma 레이어:            →  React 컴포넌트:
 
 #### 3-A. 디자인 토큰 생성
 
-`@theme` 블록을 CSS 파일에 작성한다.
+`frontend/src/styles/tokens.css`의 `@theme` 블록에 추가한다.
 
 ```css
-@import "tailwindcss";
-
 @theme {
-  --color-primary: #E50914;
-  --color-bg: #141414;
-  --color-surface: #1F1F1F;
-  --color-txt: #E5E5E5;
-  --font-body: "Pretendard", sans-serif;
-  --spacing-section: 3rem;
+  /* 색상: --color-{팔레트}-{단계} */
+  --color-primary-500: #FFC633;
+
+  /* 폰트 패밀리: --font-{이름} (--font-family-* 금지) */
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
+    "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+
+  /* 텍스트 크기 + line-height 쌍 (v4 자동 적용) */
+  --text-xs:   12px;  --text-xs--line-height:   20px;
+  --text-sm:   14px;  --text-sm--line-height:   20px;
+  --text-base: 16px;  --text-base--line-height: 28px;
+  --text-lg:   18px;  --text-lg--line-height:   28px;
+  --text-xl:   20px;  --text-xl--line-height:   28px;
+  --text-2xl:  24px;  --text-2xl--line-height:  36px;
+  --text-3xl:  30px;  --text-3xl--line-height:  36px;
+  --text-4xl:  36px;  --text-4xl--line-height:  48px;
+  --text-5xl:  48px;  --text-5xl--line-height:  48px;
+  --text-6xl:  60px;  --text-6xl--line-height:  60px;
+  --text-7xl:  72px;  --text-7xl--line-height:  60px;
+
+  /* 독립 line-height 토큰 */
+  --leading-2: 20px;  /* leading-2 클래스 */
+  --leading-4: 28px;  /* leading-4 클래스 */
+  --leading-6: 36px;  /* leading-6 클래스 */
+  --leading-8: 48px;  /* leading-8 클래스 */
+  --leading-10: 60px; /* leading-10 클래스 */
 }
 ```
 
-규칙:
+**토큰 규칙:**
 - Tailwind v4 표준 값(`text-sm`, `gap-4`, `rounded-lg` 등)으로 충분하면 토큰을 만들지 않는다
 - 프로젝트 고유 색상·폰트·간격만 토큰으로 선언한다
 - `tailwind.config.js`는 사용하지 않는다
+- 토큰에 없는 값 처리 순서: **① @theme 선언 → ② CSS 변수 선언 → ③ arbitrary `[]`**
+
+**Pretendard 폰트 로드** (`frontend/src/index.css`):
+```css
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+```
+dynamic-subset 버전(`pretendardvariable-dynamic-subset.min.css`) 사용 금지.
 
 #### 3-B. 에셋 다운로드
 
@@ -221,22 +248,25 @@ curl -o src/assets/icons/play.svg "<asset-url>"
 
 #### 3-C. 컴포넌트 코드 작성
 
-말단 컴포넌트(Card, Button 등)부터 작성하고, 조합 컴포넌트(CardGrid, Section 등)를 거쳐 페이지까지 상향식으로 구현한다.
+말단 컴포넌트(Card, Button 등)부터 작성하고, 조합 컴포넌트(ContentRow, Section 등)를 거쳐 페이지까지 상향식으로 구현한다.
 
 **코드 규칙:**
 
 | 항목 | 규칙 |
 |------|------|
-| 스타일링 | Tailwind v4 유틸리티 클래스만. 인라인 스타일 금지. 장식 CSS 금지 |
+| 파일 확장자 | `.jsx` / `.js` — TypeScript(`.tsx`, `.ts`) 금지 |
+| 스타일링 | Tailwind v4 유틸리티 클래스만. 인라인 스타일 금지 |
+| 아이콘 | `@fortawesome/react-fontawesome` + `@fortawesome/free-solid-svg-icons` (`@iconify` 금지) |
+| 라우터 | `react-router`에서 import. `createBrowserRouter` 설정은 `main.jsx`에 정의하고 `RouterProvider`를 직접 렌더링. `App.jsx`는 `<Outlet />` 브릿지 역할 |
 | 식별자 | 짧게 (`uid`, `res`, `idx`, `cls` 등) |
 | 문법 | ES2025+ (optional chaining, nullish coalescing, 구조분해 등) |
-| export | `export default function ComponentName()` |
+| export | `common/` 컴포넌트: `export function Foo` (named) / 페이지: `export default function` |
+| import | `common/`: `import { Foo } from '../components/common/Foo'` — barrel(`index.js`) 금지 |
 | props | 구조분해로 수신, 기본값 설정 |
 | 반복 데이터 | `.map()` + `key` prop. 절대 수동 복붙하지 않는다 |
 | 레이아웃 | Flexbox/Grid 우선. Figma Auto Layout → `flex`, Figma Grid → `grid` |
 | 반응형 | 모바일 퍼스트. `sm:` → `md:` → `lg:` |
-| 이미지 | `alt`, `loading="lazy"`, `width`/`height` 필수 |
-| 접근성 | 시맨틱 태그(`header`, `nav`, `main`, `section`, `footer`), ARIA |
+| 클래스 충돌 | `tailwind-merge` 사용 |
 
 **Figma → Tailwind 매핑:**
 
@@ -253,37 +283,55 @@ Sizing
   Hug       → w-fit
   Fixed     → w-[360px]
 
-Color
-  Variable 있음 → @theme 토큰 → text-primary, bg-bg
-  Variable 없음 → 임의값 → text-[#FF6B6B]
+Color (우선순위 순)
+  토큰 있음  → text-primary-500, bg-secondary-100 등
+  투명도     → bg-gray-950/60, bg-white/12 등
+  그라디언트 → bg-linear-[168deg] from-white to-primary-100
+  없으면    → @theme에 토큰 추가 후 클래스 사용
 
 Typography
-  Font Size      → text-{size}
+  Font Size      → text-{size}  (line-height 자동 적용됨)
   Font Weight    → font-{weight}
-  Line Height    → leading-{n}
+  Line Height    → leading-2 / leading-4 / leading-6 / leading-8 / leading-10
   Letter Spacing → tracking-{n}
+  Font Family    → font-sans / font-poppins
 
 Effects
-  Drop Shadow    → shadow-{size} 또는 shadow-[값]
-  Blur           → blur-{n}
-  Border Radius  → rounded-{n}
+  Drop Shadow    → shadow-sm / shadow-md / shadow-lg / shadow-xl
+  Blur           → blur-sm / blur / blur-md / blur-lg / blur-xl
+  Border Radius  → rounded-xl(12) / rounded-2xl(16) / rounded-3xl(24) / rounded-full
 ```
 
 **파일 구조:**
 
 ```
-src/
+frontend/src/
 ├── components/
-│   ├── Card.jsx
-│   ├── Nav.jsx
-│   └── SectionTitle.jsx
-├── pages/
-│   └── HomePage.jsx
+│   ├── common/       # Nav, Footer, Card 등 공용 (named export 전용)
+│   └── Typography.jsx
+├── pages/            # 페이지 컴포넌트 (export default)
 ├── assets/
 │   ├── images/
 │   └── icons/
-└── styles/
-    └── app.css           // @theme 블록
+└── styles/           # 모든 CSS 파일은 이 폴더에서 관리
+    ├── index.css     # 폰트 @import, tailwindcss, base 스타일 (main.jsx 진입점)
+    └── tokens.css    # @theme 블록 (토큰 원본: /token/*.json)
+```
+
+**CSS 진입점 (`src/styles/index.css`):**
+```css
+/* 1. 폰트 — HTML <link> 금지, @import url() 방식만 사용 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+/* 2. Tailwind + 토큰 */
+@import "tailwindcss";
+@import "./tokens.css";
+
+/* 3. Base */
+@layer base {
+  body { font-family: 'Pretendard Variable', Pretendard, ..., sans-serif; }
+}
 ```
 
 #### 3-D. 반복 요소 통합 검증
@@ -302,7 +350,7 @@ src/
 코드 작성 완료 후 다음을 확인한다.
 
 1. **시각 일치**: 스크린샷과 비교하여 레이아웃·색상·타이포가 맞는지
-2. **토큰 대응**: `@theme` 값이 Figma 디자인 값과 일치하는지
+2. **토큰 대응**: `@theme` 값이 `/token/*.json` 및 Figma 값과 일치하는지
 3. **에셋 경로**: 다운로드한 이미지·아이콘 경로가 정확한지
 4. **반복 통합**: 유사 요소가 실제로 같은 컴포넌트를 재사용하는지
 5. **하드코딩 없음**: 색상·간격에 매직넘버가 남아 있지 않은지

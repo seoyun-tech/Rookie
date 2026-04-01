@@ -3,13 +3,13 @@ import { twMerge } from 'tailwind-merge';
 // Heading
 export function Heading({ as: Tag = 'h2', size = '3xl', className, children, ...props }) {
   const sizeMap = {
-    '7xl': 'text-7xl font-extrabold leading-[60px]',
-    '6xl': 'text-6xl font-extrabold leading-[60px]',
-    '5xl': 'text-5xl font-bold   leading-[48px]',
-    '4xl': 'text-4xl font-bold   leading-[48px]',
-    '3xl': 'text-3xl font-bold   leading-9',
-    '2xl': 'text-2xl font-bold   leading-9',
-    'xl':  'text-xl  font-bold   leading-7',
+    '7xl': 'text-7xl font-extrabold leading-10',
+    '6xl': 'text-6xl font-extrabold leading-10',
+    '5xl': 'text-5xl font-bold      leading-8',
+    '4xl': 'text-4xl font-bold      leading-8',
+    '3xl': 'text-3xl font-bold      leading-6',
+    '2xl': 'text-2xl font-bold      leading-6',
+    'xl':  'text-xl  font-bold      leading-4',
   };
 
   return (
@@ -25,10 +25,10 @@ export function Heading({ as: Tag = 'h2', size = '3xl', className, children, ...
 // Body text
 export function Text({ size = 'base', muted = false, className, children, ...props }) {
   const sizeMap = {
-    lg:   'text-lg leading-7',
-    base: 'text-base leading-7',
-    sm:   'text-sm leading-5',
-    xs:   'text-xs leading-5',
+    lg:   'text-lg leading-4',
+    base: 'text-base leading-4',
+    sm:   'text-sm leading-2',
+    xs:   'text-xs leading-2',
   };
 
   return (

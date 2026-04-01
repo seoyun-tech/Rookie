@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { twMerge } from "tailwind-merge";
 import api from "../api/axios";
-import Nav from "../components/common/Nav";
-import Footer from "../components/common/Footer";
-import Card from "../components/common/Card";
-import ContentRow from "../components/common/ContentRow";
-import VideoPlayer from "../components/common/VideoPlayer";
+import { Nav } from "../components/common/Nav";
+import { Footer } from "../components/common/Footer";
+import { Card } from "../components/common/Card";
+import { ContentRow } from "../components/common/ContentRow";
+import { VideoPlayer } from "../components/common/VideoPlayer";
 
 const AI_ROO =
   "https://www.figma.com/api/mcp/asset/72ba9870-e738-4c0f-9884-a7b11cfa61cc";

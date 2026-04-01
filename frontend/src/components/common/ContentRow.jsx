@@ -1,6 +1,6 @@
 import { twMerge } from 'tailwind-merge';
-import Header from './Header';
-import Card from './Card';
+import { Header } from './Header';
+import { Card } from './Card';
 
 /**
  * ContentRow — 섹션 타이틀 + 카드 리스트
@@ -8,7 +8,7 @@ import Card from './Card';
  * items 배열: [{ id, title, image, size }]
  * items 없이 children만 넣어도 동작
  */
-export default function ContentRow({ title, items, showViewAll = true, viewAllLink = '#', className, children }) {
+export function ContentRow({ title, items, showViewAll = true, viewAllLink = '#', className, children }) {
   return (
     <div className={twMerge('w-full flex flex-col gap-7', className)}>
 

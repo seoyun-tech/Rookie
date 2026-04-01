@@ -4,7 +4,7 @@ const imgBubble = "https://www.figma.com/api/mcp/asset/bf258461-767a-487a-8b48-2
 /**
  * AiRoo — 고정 플로팅 AI 루 채팅 버튼
  */
-export default function AiRoo({ onClick }) {
+export function AiRoo({ onClick }) {
   return (
     <div className="fixed bottom-6 right-6 md:bottom-20 md:right-20 flex items-center gap-2 z-[100]">
 
@@ -15,7 +15,7 @@ export default function AiRoo({ onClick }) {
           className="w-[160px] md:w-[216px]"
           alt="bubble"
         />
-        <span className="absolute inset-0 flex items-center justify-center text-[#71716a] text-base md:text-xl font-semibold mb-2">
+        <span className="absolute inset-0 flex items-center justify-center text-gray-600 text-base md:text-xl font-semibold mb-2">
           루에게 물어보세요!
         </span>
       </div>

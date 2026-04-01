@@ -9,7 +9,7 @@ const AGE_ASSETS = {
 /**
  * Age Selection Button
  */
-export default function AgeButton({ label, active = false, onClick, className }) {
+export function AgeButton({ label, active = false, onClick, className }) {
   const isKid = label.includes('키즈');
   
   return (
