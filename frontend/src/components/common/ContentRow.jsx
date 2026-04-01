@@ -15,7 +15,7 @@ export default function ContentRow({ title, items, showViewAll = true, viewAllLi
       <Header title={title} showViewAll={showViewAll} viewAllLink={viewAllLink} />
 
       {items ? (
-        <div className="flex gap-6 overflow-x-auto overflow-y-hidden pb-2 max-w-[1200px]">
+        <div className="flex gap-4 md:gap-6 overflow-x-auto overflow-y-hidden pb-2 w-full max-w-[1200px] scrollbar-hide">
           {items.map((item) => (
             <Card
               key={item.id}

@@ -34,8 +34,8 @@ export default function MainPage() {
       <Nav activeTab="main" />
 
       {/* Hero Banner - matching frame 223:288 */}
-      <section className="w-full max-w-[1280px] px-10 pt-6 pb-10">
-        <div className="relative w-[1200px] h-[600px] rounded-3xl overflow-hidden shadow-sm mx-auto">
+      <section className="w-full max-w-[1280px] px-4 md:px-10 pt-4 md:pt-6 pb-6 md:pb-10">
+        <div className="relative w-full aspect-[16/9] md:aspect-[2/1] rounded-2xl md:rounded-3xl overflow-hidden shadow-sm mx-auto">
           <img 
             src={ASSETS.hero} 
             className="absolute inset-0 w-full h-full object-cover"
@@ -43,23 +43,23 @@ export default function MainPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
           
-          <div className="absolute bottom-12 left-12 max-w-[672px] flex flex-col gap-4 text-white">
-            <div className="bg-primary-400 w-fit px-3 py-1.5 rounded-full flex items-center gap-2">
-              <FontAwesomeIcon icon={faStar} className="text-primary-700 size-5" />
-              <span className="text-sm font-bold text-primary-700 font-poppins">신규</span>
+          <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 max-w-[90%] md:max-w-[672px] flex flex-col gap-2 md:gap-4 text-white">
+            <div className="bg-primary-400 w-fit px-2 py-1 md:px-3 md:py-1.5 rounded-full flex items-center gap-1.5 md:gap-2">
+              <FontAwesomeIcon icon={faStar} className="text-primary-700 size-3 md:size-5" />
+              <span className="text-xs md:text-sm font-bold text-primary-700 font-poppins">신규</span>
             </div>
-            <h1 className="text-[60px] font-black leading-[60px] font-poppins">슈퍼 히어로 특공대!</h1>
-            <div className="text-lg font-medium text-white/80 leading-7">
+            <h1 className="text-2xl md:text-4xl lg:text-[60px] font-black md:leading-[60px] font-poppins">슈퍼 히어로 특공대!</h1>
+            <div className="text-sm md:text-lg font-medium text-white/80 leading-snug md:leading-7">
               <p>슈퍼히어로가 꿈인 승아는 친구들을 모아 특공대를 만든다!</p>
-              <p>승아와 친구들의 좌충우돌 도전기</p>
+              <p className="hidden md:block">승아와 친구들의 좌충우돌 도전기</p>
             </div>
-            <div className="flex gap-4 mt-2">
-              <button className="bg-primary-500 text-gray-700 px-8 py-4 rounded-[48px] flex items-center gap-2 shadow-lg hover:bg-primary-400 transition-all font-bold text-2xl">
-                <FontAwesomeIcon icon={faPlay} className="size-6" />
+            <div className="flex gap-2 md:gap-4 mt-1 md:mt-2">
+              <button className="bg-primary-500 text-gray-700 px-4 py-2 md:px-8 md:py-4 rounded-[48px] flex items-center gap-1.5 md:gap-2 shadow-lg hover:bg-primary-400 transition-all font-bold text-sm md:text-2xl">
+                <FontAwesomeIcon icon={faPlay} className="size-3 md:size-6" />
                 <span>보러가기</span>
               </button>
-              <button className="bg-white/20 backdrop-blur-sm border border-gray-50 text-gray-50 px-8 py-4 rounded-[48px] flex items-center gap-2 shadow-lg hover:bg-white/30 transition-all font-bold text-2xl">
-                <FontAwesomeIcon icon={faCircleInfo} className="size-6" />
+              <button className="bg-white/20 backdrop-blur-sm border border-gray-50 text-gray-50 px-4 py-2 md:px-8 md:py-4 rounded-[48px] flex items-center gap-1.5 md:gap-2 shadow-lg hover:bg-white/30 transition-all font-bold text-sm md:text-2xl">
+                <FontAwesomeIcon icon={faCircleInfo} className="size-3 md:size-6" />
                 <span>더보기</span>
               </button>
             </div>
@@ -68,30 +68,30 @@ export default function MainPage() {
       </section>
 
       {/* Main Content Area */}
-      <main className="w-full max-w-[1280px] flex flex-col gap-10">
+      <main className="w-full max-w-[1280px] flex flex-col gap-6 md:gap-10">
         
         {/* Age Selection */}
-        <div className="px-10 flex gap-3.5">
+        <div className="px-4 md:px-10 flex gap-2 md:gap-3.5 overflow-x-auto scrollbar-hide">
           <AgeButton label="키즈 4~7세" active />
           <AgeButton label="주니어 8~12세" />
         </div>
 
         {/* Sections */}
-        <div className="flex flex-col gap-10 pb-20">
+        <div className="flex flex-col gap-8 md:gap-10 pb-20">
           
-          <ContentRow title="이어보기" className="px-10">
-            <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
+          <ContentRow title="이어보기" className="px-4 md:px-10">
+            <div className="flex gap-4 md:gap-6 overflow-x-auto pb-4 scrollbar-hide">
               {[1, 2, 3, 4].map(i => (
-                <div key={i} className="flex flex-col gap-2.5 min-w-[320px]">
-                  <div className="relative h-[180px] rounded-3xl overflow-hidden group">
+                <div key={i} className="flex flex-col gap-2 md:gap-2.5 min-w-[240px] md:min-w-[320px]">
+                  <div className="relative h-[140px] md:h-[180px] rounded-2xl md:rounded-3xl overflow-hidden group">
                     <img src={ASSETS.fox} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-200/50">
                       <div className="bg-primary-500 h-full w-1/2" />
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-2xl font-bold text-gray-800">여우들의 비밀</h4>
-                    <p className="text-lg font-medium text-gray-500">10분 남음</p>
+                    <h4 className="text-lg md:text-2xl font-bold text-gray-800">여우들의 비밀</h4>
+                    <p className="text-sm md:text-lg font-medium text-gray-500">10분 남음</p>
                   </div>
                 </div>
               ))}
@@ -99,18 +99,18 @@ export default function MainPage() {
           </ContentRow>
 
           {/* 루의 추천 - 주간 트렌딩 */}
-          <ContentRow title="루의 추천" className="px-10">
-            <div className="grid grid-cols-4 grid-rows-2 gap-10 h-[580px]">
+          <ContentRow title="루의 추천" className="px-4 md:px-10">
+            <div className="grid grid-cols-2 lg:grid-cols-4 lg:grid-rows-2 gap-4 md:gap-10">
               {trending.slice(0, 5).map((item, i) => (
-                <div key={item.id} className={i === 0 ? 'col-span-2 row-span-2' : ''}>
+                <div key={item.id} className={i === 0 ? 'col-span-2 lg:row-span-2' : ''}>
                   <Card
                     size={i === 0 ? 'lg' : 'sm'}
                     title={item.title || item.name}
                     image={getImageUrl(item.poster_path)}
-                    className={i === 0 ? 'h-full' : ''}
+                    className={i === 0 ? 'aspect-[16/9] lg:aspect-auto lg:h-full' : 'aspect-square'}
                     onClick={() => navigate(`/movie/${item.id}`)}
                   >
-                    <span className="text-sm font-semibold text-yellow-400 mt-1">
+                    <span className="text-xs md:text-sm font-semibold text-yellow-400 mt-0.5 md:mt-1">
                       ★ {item.vote_average?.toFixed(1)}
                     </span>
                   </Card>
@@ -120,26 +120,26 @@ export default function MainPage() {
           </ContentRow>
 
           {/* 인기 있는 캐릭터! */}
-          <ContentRow title="인기 있는 캐릭터!" className="px-10">
-            <div className="flex gap-10">
+          <ContentRow title="인기 있는 캐릭터!" className="px-4 md:px-10">
+            <div className="flex gap-4 md:gap-10 overflow-x-auto pb-4 scrollbar-hide">
               {[1, 2, 3, 4, 5].map(i => (
-                <div key={i} className="flex flex-col items-center gap-3">
-                  <div className="w-[208px] h-[188px] rounded-[48px] bg-white overflow-hidden shadow-sm">
+                <div key={i} className="flex flex-col items-center gap-2 md:gap-3 shrink-0">
+                  <div className="w-32 h-32 md:w-[208px] md:h-[188px] rounded-2xl md:rounded-[48px] bg-white overflow-hidden shadow-sm">
                     <img src={ASSETS.lion} className="w-full h-full object-cover" />
                   </div>
-                  <span className="text-2xl font-semibold text-gray-700">사자선생님</span>
+                  <span className="text-sm md:text-2xl font-semibold text-gray-700">사자선생님</span>
                 </div>
               ))}
             </div>
           </ContentRow>
 
           {/* 인기 콘텐츠 - 키즈 영화 */}
-          <ContentRow title="인기 콘텐츠" className="px-10">
-            <div className="grid grid-cols-4 gap-10">
+          <ContentRow title="인기 콘텐츠" className="px-4 md:px-10">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-10">
               {kidsMovies.slice(0, 4).map((movie) => (
                 <div 
                   key={movie.id} 
-                  className="h-[360px] rounded-[50px] overflow-hidden relative group cursor-pointer shadow-sm"
+                  className="aspect-[3/4] md:h-[360px] rounded-2xl md:rounded-[50px] overflow-hidden relative group cursor-pointer shadow-sm"
                   onClick={() => navigate(`/movie/${movie.id}`)}
                 >
                   <img
@@ -148,10 +148,10 @@ export default function MainPage() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-6 left-6 right-4 text-white text-[21px] font-black leading-snug line-clamp-2">
+                  <div className="absolute bottom-4 left-4 right-3 md:bottom-6 md:left-6 md:right-4 text-white text-sm md:text-[21px] font-black leading-snug line-clamp-2">
                     {movie.title}
                   </div>
-                  <div className="absolute top-4 right-4 bg-black/50 text-yellow-400 text-sm font-bold px-2 py-1 rounded-full">
+                  <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-black/50 text-yellow-400 text-xs md:text-sm font-bold px-2 py-0.5 md:py-1 rounded-full">
                     ★ {movie.vote_average?.toFixed(1)}
                   </div>
                 </div>
@@ -160,13 +160,13 @@ export default function MainPage() {
           </ContentRow>
 
           {/* 프리미엄 배너 */}
-          <div className="mx-10 h-[160px] bg-blue-900 rounded-4xl flex items-center justify-between px-8 relative overflow-hidden shadow-lg">
-            <div className="absolute -right-10 -bottom-10 size-48 bg-primary-500/20 blur-[32px] rounded-full" />
-            <div className="flex flex-col gap-5 relative z-10 text-gray-50">
-              <h2 className="text-4xl font-black">프리미엄으로 구독하세요!</h2>
-              <p className="text-xl font-normal">더 많은 혜택이 팡팡! 프리미엄으로 더 많은 프로필을 등록하세요!</p>
+          <div className="mx-4 md:mx-10 min-h-[120px] md:h-[160px] bg-blue-900 rounded-2xl md:rounded-4xl flex flex-col md:flex-row items-start md:items-center justify-between p-6 md:px-8 relative overflow-hidden shadow-lg gap-4">
+            <div className="absolute -right-10 -bottom-10 size-32 md:size-48 bg-primary-500/20 blur-[24px] md:blur-[32px] rounded-full" />
+            <div className="flex flex-col gap-2 md:gap-5 relative z-10 text-gray-50">
+              <h2 className="text-xl md:text-4xl font-black">프리미엄으로 구독하세요!</h2>
+              <p className="text-sm md:text-xl font-normal opacity-90">더 많은 혜택이 팡팡! 프리미엄으로 더 많은 프로필을 등록하세요!</p>
             </div>
-            <button className="bg-primary-500 text-primary-950 px-8 py-4 rounded-[48px] font-black text-2xl shadow-lg relative z-10 hover:bg-primary-400 transition-all">
+            <button className="bg-primary-500 text-primary-950 px-6 py-2.5 md:px-8 md:py-4 rounded-full md:rounded-[48px] font-black text-sm md:text-2xl shadow-lg relative z-10 hover:bg-primary-400 transition-all shrink-0">
               보러가기
             </button>
           </div>
@@ -174,16 +174,16 @@ export default function MainPage() {
         </div>
       </main>
 
-      {/* AI Roo Chat Button - Precisely positioned based on 270:2494 */}
-      <div className="fixed bottom-20 right-20 flex items-center gap-2 group z-[100]">
-        <div className="relative">
-          <img src={ASSETS.union} className="w-[216px]" alt="bubble" />
-          <span className="absolute inset-0 flex items-center justify-center text-gray-600 text-2xl font-semibold mb-2">
+      {/* AI Roo Chat Button */}
+      <div className="fixed bottom-6 right-6 md:bottom-20 md:right-20 flex items-center gap-2 group z-[100]">
+        <div className="relative hidden sm:block">
+          <img src={ASSETS.union} className="w-[160px] md:w-[216px]" alt="bubble" />
+          <span className="absolute inset-0 flex items-center justify-center text-gray-600 text-lg md:text-2xl font-semibold mb-2">
             루에게 물어보세요!
           </span>
         </div>
-        <div className="size-[95px] bg-primary-300 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border-4 border-white">
-          <img src={ASSETS.aiRoo} className="w-[125px] h-[180px] object-contain translate-y-4" alt="Roo" />
+        <div className="size-16 md:size-[95px] bg-primary-300 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border-2 md:border-4 border-white">
+          <img src={ASSETS.aiRoo} className="w-[80px] md:w-[125px] h-auto object-contain translate-y-2 md:translate-y-4" alt="Roo" />
         </div>
       </div>
 

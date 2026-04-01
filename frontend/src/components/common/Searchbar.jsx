@@ -11,19 +11,19 @@ export default function Searchbar({ placeholder = "제목, 장르, 캐릭터 검
   return (
     <div 
       className={twMerge(
-        'w-full h-20 bg-white border-4 border-primary-500 rounded-[24px] flex items-center px-8 gap-4 shadow-sm',
+        'w-full h-14 md:h-20 bg-white border-2 md:border-4 border-primary-500 rounded-2xl md:rounded-[24px] flex items-center px-4 md:px-8 gap-3 md:gap-4 shadow-sm',
         className
       )}
     >
-      <FontAwesomeIcon icon={faMagnifyingGlass} className="text-2xl text-gray-700" />
+      <FontAwesomeIcon icon={faMagnifyingGlass} className="text-lg md:text-2xl text-gray-700" />
       <input 
         type="text" 
         placeholder={placeholder}
-        className="flex-1 text-[21px] font-medium text-gray-700 outline-none placeholder:text-gray-300 bg-transparent"
+        className="flex-1 text-base md:text-[21px] font-medium text-gray-700 outline-none placeholder:text-gray-300 bg-transparent"
         onChange={(e) => onSearch?.(e.target.value)}
       />
       <button className="p-2 text-gray-700 hover:text-primary-500 transition-colors cursor-pointer">
-        <FontAwesomeIcon icon={faMicrophone} className="text-2xl" />
+        <FontAwesomeIcon icon={faMicrophone} className="text-lg md:text-2xl" />
       </button>
     </div>
   );
