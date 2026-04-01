@@ -20,18 +20,18 @@ function NavButton({ icon, label, active = false, onClick }) {
     <button
       onClick={onClick}
       className={twMerge(
-        'flex flex-col items-center justify-center w-[80px] h-[80px] rounded-3xl transition-all duration-200 cursor-pointer p-3 gap-1',
+        'flex flex-col items-center justify-center w-[60px] h-[60px] md:w-[80px] md:h-[80px] rounded-2xl md:rounded-3xl transition-all duration-200 cursor-pointer p-2 md:p-3 gap-0.5 md:gap-1',
         active ? 'bg-primary-500 shadow-sm' : 'bg-gray-50 hover:bg-gray-100 active:bg-gray-200'
       )}
     >
       <div className={twMerge(
-        'flex items-center justify-center size-[30px]',
+        'flex items-center justify-center size-[20px] md:size-[30px]',
         active ? 'text-primary-950' : 'text-gray-300'
       )}>
-        <FontAwesomeIcon icon={icon} className="text-[24px]" />
+        <FontAwesomeIcon icon={icon} className="text-[18px] md:text-[24px]" />
       </div>
       <span className={twMerge(
-        'text-xs font-semibold leading-tight font-sans',
+        'text-[10px] md:text-xs font-semibold leading-tight font-sans block',
         active ? 'text-primary-950' : 'text-gray-300'
       )}>
         {label}
@@ -45,18 +45,18 @@ function NavButton({ icon, label, active = false, onClick }) {
  */
 function NavProfile({ name = "최승아", zone = "키즈존 4~7세" }) {
   return (
-    <button className="flex items-center h-[44px] w-[150px] bg-gray-50 rounded-full px-[10px] gap-[8px] hover:bg-gray-100 transition-colors cursor-pointer border-none outline-none">
-      <div className="size-[24px] bg-gray-200 rounded-full flex items-center justify-center overflow-hidden shrink-0">
+    <button className="flex items-center h-[36px] md:h-[44px] w-fit md:w-[150px] bg-gray-50 rounded-full px-2 md:px-[10px] gap-1 md:gap-[8px] hover:bg-gray-100 transition-colors cursor-pointer border-none outline-none">
+      <div className="size-5 md:size-[24px] bg-gray-200 rounded-full flex items-center justify-center overflow-hidden shrink-0">
         <img src={NAV_ASSETS.profile} className="w-full h-full object-cover" alt="profile" />
       </div>
-      <div className="flex flex-col items-start leading-tight overflow-hidden">
+      <div className="hidden md:flex flex-col items-start leading-tight overflow-hidden text-left">
         <div className="flex items-center gap-1">
           <span className="text-sm font-bold text-gray-700 font-sans whitespace-nowrap">{name}</span>
           <img src={NAV_ASSETS.leaf} className="size-[16px]" alt="leaf" />
         </div>
         <span className="text-[12px] font-bold text-green-600 font-sans whitespace-nowrap">{zone}</span>
       </div>
-      <div className="ml-auto">
+      <div className="ml-auto hidden md:block">
         <img src={NAV_ASSETS.arrowDown} className="size-[12px]" alt="arrow" />
       </div>
     </button>
@@ -70,22 +70,22 @@ export default function Nav({ activeTab = "main" }) {
   const navigate = useNavigate();
 
   return (
-    <nav className="sticky top-0 z-50 w-full h-[120px] bg-white/80 backdrop-blur-md shadow-sm flex items-center justify-center px-10">
-      <div className="w-full max-w-[1200px] flex items-center justify-between">
+    <nav className="sticky top-0 z-50 w-full h-[80px] md:h-[120px] bg-white/80 backdrop-blur-md shadow-sm flex items-center justify-center px-4 md:px-10">
+      <div className="w-full max-w-[1200px] flex items-center justify-between gap-2">
         
         {/* Left: Logo */}
         <div 
-          className="flex items-center p-[27px] select-none cursor-pointer"
+          className="flex items-center p-2 md:p-[27px] select-none cursor-pointer shrink-0"
           onClick={() => navigate('/')}
         >
-          <span className="text-[54px] font-black tracking-tight leading-none uppercase font-sans">
+          <span className="text-2xl md:text-[54px] font-black tracking-tight leading-none uppercase font-sans">
             <span className="text-[#3d2200]">Roo</span>
             <span className="text-[#ffc633]">KIZ</span>
           </span>
         </div>
 
         {/* Center: Nav Buttons */}
-        <div className="flex items-center gap-[18px]">
+        <div className="flex items-center gap-2 md:gap-[18px]">
           <NavButton 
             icon={faHome} 
             label="메인" 
@@ -94,29 +94,29 @@ export default function Nav({ activeTab = "main" }) {
           />
           <NavButton 
             icon={faStar} 
-            label="내 친구 루" 
+            label="내 친구" 
             active={activeTab === "airon"} 
             onClick={() => navigate('/airon')}
           />
           <NavButton 
             icon={faUser} 
-            label="마이 페이지" 
+            label="마이" 
             active={activeTab === "mypage"} 
             onClick={() => navigate('/mypage')}
           />
         </div>
 
         {/* Right: Actions */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1 md:gap-1.5 shrink-0">
           <button 
-            className="size-[38px] bg-gray-50 rounded-full flex items-center justify-center cursor-pointer transition-colors overflow-hidden"
+            className="size-8 md:size-[38px] bg-gray-50 rounded-full flex items-center justify-center cursor-pointer transition-colors overflow-hidden"
             onClick={() => navigate('/search')}
           >
-            <img src={NAV_ASSETS.search} className="size-[15px]" alt="search" />
+            <img src={NAV_ASSETS.search} className="size-[12px] md:size-[15px]" alt="search" />
           </button>
-          <button className="size-[38px] bg-gray-50 rounded-full flex items-center justify-center cursor-pointer transition-colors relative overflow-hidden">
-            <img src="https://www.figma.com/api/mcp/asset/eef3f84d-05be-41d5-b5d5-2b96ea972da0" className="size-[18px]" alt="bell" />
-            <div className="absolute top-2 right-2 size-[8px] bg-secondary-400 rounded-full" />
+          <button className="size-8 md:size-[38px] bg-gray-50 rounded-full flex items-center justify-center cursor-pointer transition-colors relative overflow-hidden">
+            <img src="https://www.figma.com/api/mcp/asset/eef3f84d-05be-41d5-b5d5-2b96ea972da0" className="size-[15px] md:size-[18px]" alt="bell" />
+            <div className="absolute top-1 right-1 md:top-2 md:right-2 size-1.5 md:size-[8px] bg-secondary-400 rounded-full" />
           </button>
           <div className="ml-1">
             <NavProfile />

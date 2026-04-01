@@ -16,7 +16,7 @@ export default function AgeButton({ label, active = false, onClick, className })
     <button
       onClick={onClick}
       className={twMerge(
-        'flex items-center justify-center gap-[8px] h-[60px] px-[22px] py-[16px] rounded-full border-[2px] transition-all duration-200 cursor-pointer shadow-sm font-sans',
+        'flex items-center justify-center gap-[6px] md:gap-[8px] h-[48px] md:h-[60px] px-[16px] md:px-[22px] py-[10px] md:py-[16px] rounded-full border-[2px] transition-all duration-200 cursor-pointer shadow-sm font-sans shrink-0',
         active 
           ? 'bg-green-100 border-green-600 text-gray-700 font-bold' 
           : 'bg-gray-50 border-gray-300 text-gray-300 hover:bg-white',
@@ -25,10 +25,10 @@ export default function AgeButton({ label, active = false, onClick, className })
     >
       <img 
         src={isKid ? AGE_ASSETS.kid : AGE_ASSETS.junior} 
-        className="size-[24px]" 
+        className="size-[18px] md:size-[24px]" 
         alt="icon" 
       />
-      <span className="text-xl">{label}</span>
+      <span className="text-sm md:text-xl whitespace-nowrap">{label}</span>
     </button>
   );
 }
