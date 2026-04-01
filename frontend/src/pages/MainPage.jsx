@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Nav from "../components/common/Nav";
 import Footer from "../components/common/Footer";
 import AgeButton from "../components/common/AgeButton";
 import ContentRow from "../components/common/ContentRow";
 import Card from "../components/common/Card";
+import CharacterRow from "../components/common/CharacterRow";
+import CharacterCard from "../components/common/CharacterCard";
+import AiRoo from "../components/common/AiRoo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStar,
@@ -152,26 +155,15 @@ export default function MainPage() {
           </ContentRow>
 
           {/* 인기 있는 캐릭터! */}
-          <ContentRow title="인기 있는 캐릭터!" className="px-4 md:px-10">
-            <div className="flex gap-4 md:gap-10 overflow-x-auto pb-4 scrollbar-hide">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div
-                  key={i}
-                  className="flex flex-col items-center gap-2 md:gap-3 shrink-0"
-                >
-                  <div className="w-32 h-32 md:w-[208px] md:h-[188px] rounded-2xl md:rounded-[48px] bg-white overflow-hidden shadow-sm">
-                    <img
-                      src={ASSETS.lion}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <span className="text-sm md:text-2xl font-semibold text-gray-700">
-                    사자선생님
-                  </span>
-                </div>
-              ))}
-            </div>
-          </ContentRow>
+          <CharacterRow>
+            {[1, 2, 3, 4, 5].map((i) => (
+              <CharacterCard
+                key={i}
+                name="사자선생님"
+                image={ASSETS.lion}
+              />
+            ))}
+          </CharacterRow>
 
           {/* 인기 콘텐츠 - 키즈 영화 */}
           <ContentRow title="인기 콘텐츠" className="px-4 md:px-10">
@@ -217,26 +209,7 @@ export default function MainPage() {
         </div>
       </main>
 
-      {/* AI Roo Chat Button */}
-      <div className="fixed bottom-6 right-6 md:bottom-20 md:right-20 flex items-center gap-2 group z-[100]">
-        <div className="relative hidden sm:block">
-          <img
-            src={ASSETS.union}
-            className="w-[160px] md:w-[216px]"
-            alt="bubble"
-          />
-          <span className="absolute inset-0 flex items-center justify-center text-gray-600 text-lg md:text-2xl font-semibold mb-2">
-            루에게 물어보세요!
-          </span>
-        </div>
-        <div className="size-16 md:size-[95px] bg-primary-300 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border-2 md:border-4 border-white">
-          <img
-            src={ASSETS.aiRoo}
-            className="w-[80px] md:w-[125px] h-auto object-contain translate-y-2 md:translate-y-4"
-            alt="Roo"
-          />
-        </div>
-      </div>
+      <AiRoo />
 
       <Footer />
     </div>
