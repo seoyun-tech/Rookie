@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router";
 import { twMerge } from "tailwind-merge";
 import api from "../api/axios";
 import Nav from "../components/common/Nav";

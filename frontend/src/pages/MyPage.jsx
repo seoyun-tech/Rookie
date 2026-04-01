@@ -1,11 +1,24 @@
+import { useState } from 'react';
 import Nav from '../components/common/Nav';
 import Footer from '../components/common/Footer';
 import ContentRow from '../components/common/ContentRow';
 import Card from '../components/common/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faStar, faShield, faChartLine, faAward } from '@fortawesome/free-solid-svg-icons';
+import {
+  faUser, faStar, faShield, faChartLine, faAward,
+  faLeaf, faClock, faTriangleExclamation, faCalendarDays, faPencil
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function MyPage() {
+  // 10개 스티커: true = 획득(노란색), false = 미획득(회색)
+  const [stickers, setStickers] = useState(
+    Array(10).fill(false).map((_, i) => i < 4)
+  );
+
+  function toggleSticker(idx) {
+    setStickers(prev => prev.map((v, i) => (i === idx ? !v : v)));
+  }
+
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <Nav activeTab="mypage" />
@@ -13,62 +26,77 @@ export default function MyPage() {
       <main className="flex-1 w-full max-w-[1280px] mx-auto px-10 py-20 flex flex-col gap-20">
         
         {/* Profile Section */}
-        <section className="flex items-center gap-12 bg-gray-50 p-12 rounded-[48px] relative overflow-hidden">
-          <div className="size-40 bg-white rounded-full flex items-center justify-center border-8 border-primary-500 shadow-xl relative z-10 overflow-hidden">
-             <FontAwesomeIcon icon={faUser} className="text-gray-200 text-7xl translate-y-2" />
-          </div>
-          <div className="flex flex-col gap-4 relative z-10">
-            <div className="flex items-center gap-4">
-              <h1 className="text-[48px] font-black text-gray-800">최승아</h1>
-              <div className="bg-green-600 text-white px-4 py-1.5 rounded-full text-lg font-bold">키즈 4~7세</div>
-            </div>
-            <p className="text-gray-400 text-xl font-medium">루키즈와 함께한 지 <span className="text-primary-500 font-bold">128일</span>째예요!</p>
-            <div className="flex gap-4 mt-2">
-              <div className="bg-white px-6 py-3 rounded-2xl shadow-sm flex items-center gap-3">
-                <FontAwesomeIcon icon={faStar} className="text-primary-500 text-xl" />
-                <span className="font-bold">포인트 2,450P</span>
+        <section
+          className="relative rounded-3xl border-b border-[#f0f0f0] p-10 overflow-hidden"
+          style={{ background: 'linear-gradient(168deg, #fafafa 0%, #fff9e6 100%)' }}
+        >
+          <div className="flex flex-col gap-5 items-center">
+
+            {/* 프로필 아이콘 + 키즈 칩 */}
+            <div className="flex gap-5 items-center">
+              <div className="size-20 bg-white rounded-[27px] shadow-md flex items-center justify-center shrink-0 transition-transform duration-300 hover:scale-110 hover:shadow-lg">
+                <FontAwesomeIcon icon={faUser} className="text-primary-400 text-3xl" />
               </div>
-              <div className="bg-white px-6 py-3 rounded-2xl shadow-sm flex items-center gap-3">
-                <FontAwesomeIcon icon={faAward} className="text-secondary-500 text-xl" />
-                <span className="font-bold">베스트 탐험가</span>
+              <div className="flex items-center gap-2 bg-green-200 px-3 py-1.5 rounded-full transition-all duration-300 hover:bg-green-300 hover:scale-105">
+                <FontAwesomeIcon icon={faLeaf} className="text-green-600 text-sm" />
+                <span className="text-green-600 font-bold text-sm whitespace-nowrap">키즈 4~7세</span>
               </div>
             </div>
+
+            {/* 통계 카드 3개 */}
+            <div className="flex gap-4 items-center">
+              <div className="bg-white border border-gray-100 rounded-3xl px-5 py-4 flex gap-2.5 items-center h-[71px] transition-all duration-300 hover:-translate-y-1 hover:shadow-md cursor-pointer">
+                <FontAwesomeIcon icon={faClock} className="text-primary-400 text-[28px] shrink-0 transition-transform duration-300 group-hover:rotate-12" />
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-sm font-bold text-gray-700">오늘 시청 시간</span>
+                  <span className="text-xl font-bold text-gray-700 font-poppins">1h 30m</span>
+                </div>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-3xl px-5 py-4 flex gap-2.5 items-center h-[71px] transition-all duration-300 hover:-translate-y-1 hover:shadow-md cursor-pointer">
+                <FontAwesomeIcon icon={faTriangleExclamation} className="text-secondary-500 text-[28px] shrink-0" />
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-sm font-bold text-gray-700">접근 제한 영상</span>
+                  <span className="text-xl font-bold text-gray-700 font-poppins">10개</span>
+                </div>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-3xl px-5 py-4 flex gap-2.5 items-center h-[71px] transition-all duration-300 hover:-translate-y-1 hover:shadow-md cursor-pointer">
+                <FontAwesomeIcon icon={faCalendarDays} className="text-blue-500 text-[28px] shrink-0" />
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-sm font-bold text-gray-700">연속시청</span>
+                  <span className="text-xl font-bold text-gray-700 font-poppins">7일차</span>
+                </div>
+              </div>
+            </div>
+
           </div>
-          {/* Decorative Background */}
-          <div className="absolute top-0 right-0 p-20 opacity-10">
-             <FontAwesomeIcon icon={faShield} className="text-[300px] text-primary-500" />
-          </div>
+
+          {/* 프로필 수정 버튼 (우상단 절대 위치) */}
+          <button className="absolute top-10 right-10 flex items-center gap-2 text-gray-500 font-bold transition-all duration-300 hover:text-gray-800 hover:gap-3">
+            <FontAwesomeIcon icon={faPencil} className="text-base transition-transform duration-300 hover:rotate-12" />
+            <span className="text-base">프로필 수정</span>
+          </button>
         </section>
 
-        {/* Bento Grid: Care Report & Stats */}
-        <section className="grid grid-cols-12 gap-8 h-[500px]">
-          <div className="col-span-8 bg-blue-50 rounded-[48px] p-12 flex flex-col justify-between group cursor-pointer hover:shadow-xl transition-all">
-             <div className="flex justify-between items-start">
-               <div className="flex flex-col gap-4">
-                 <h2 className="text-[36px] font-black text-blue-900 leading-tight">이번 주<br />성장 리포트</h2>
-                 <p className="text-blue-700/60 text-lg font-bold">승아의 창의력이 쑥쑥 자라고 있어요!</p>
-               </div>
-               <div className="size-24 bg-white rounded-3xl flex items-center justify-center text-blue-500 text-4xl shadow-sm">
-                 <FontAwesomeIcon icon={faChartLine} />
-               </div>
-             </div>
-             <div className="flex gap-4">
-               {[1, 2, 3, 4, 5, 6, 7].map(d => (
-                 <div key={d} className="flex-1 h-32 bg-white/50 rounded-2xl flex flex-col-reverse p-2 gap-2">
-                    <div className="w-full bg-blue-500 rounded-lg" style={{ height: `${Math.random() * 100}%` }} />
-                 </div>
-               ))}
-             </div>
-          </div>
-          <div className="col-span-4 bg-orange-50 rounded-[48px] p-12 flex flex-col gap-6 items-center justify-center text-center group cursor-pointer hover:shadow-xl transition-all">
-             <div className="size-24 bg-white rounded-full shadow-lg flex items-center justify-center text-orange-500 text-4xl group-hover:scale-110 transition-transform">
-               <FontAwesomeIcon icon={faAward} />
-             </div>
-             <div className="flex flex-col gap-2">
-               <h3 className="text-2xl font-black text-orange-900">도감 수집 현황</h3>
-               <p className="text-orange-700/60 font-bold text-lg">45 / 120</p>
-             </div>
-             <button className="w-full py-4 bg-orange-500 text-white rounded-2xl font-black shadow-lg">보러가기</button>
+        {/* 칭찬 하루 Section */}
+        <section className="flex flex-col gap-7">
+          <h2 className="text-4xl font-extrabold text-[#44433f]">칭찬 하루</h2>
+          <div className="flex flex-wrap gap-x-[50px] gap-y-[46px]">
+            {stickers.map((active, i) => (
+              <button
+                key={i}
+                onClick={() => toggleSticker(i)}
+                className={`w-[200px] h-[100px] rounded-full border-[2.7px] flex items-center justify-center cursor-pointer transition-all duration-300
+                  ${active
+                    ? 'bg-primary-100 border-primary-400 hover:scale-105 hover:shadow-md'
+                    : 'bg-white border-gray-300 hover:scale-105 hover:border-primary-300'
+                  }`}
+              >
+                <FontAwesomeIcon
+                  icon={faAward}
+                  className={`text-3xl transition-all duration-300 ${active ? 'text-primary-400' : 'text-gray-300'}`}
+                />
+              </button>
+            ))}
           </div>
         </section>
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import Nav from "../components/common/Nav";
 import Footer from "../components/common/Footer";
 import AgeButton from "../components/common/AgeButton";
