@@ -9,7 +9,7 @@ export function Footer({ className }) {
         {/* 로고 & 저작권 */}
         <div className="flex flex-col gap-2 shrink-0">
           <div className="py-0 md:py-7">
-            <img src="./LOGO.svg" alt="ROOKIZ" className="h-8 md:h-12 w-auto" />
+            <img src="/LOGO.svg" alt="ROOKIZ" className="h-8 md:h-12 w-auto" />
           </div>
           <p className="text-xs text-gray-400">© 2026 Rookiz AI. The Guided Playground.</p>
         </div>
