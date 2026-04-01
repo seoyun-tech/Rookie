@@ -3,7 +3,8 @@
     "allow": [
       "mcp__claude_ai_Figma__whoami",
       "mcp__claude_ai_Figma__get_design_context",
-      "mcp__claude_ai_Figma__get_metadata"
+      "mcp__claude_ai_Figma__get_metadata",
+      "Bash(npm install:*)"
     ]
   }
 }
