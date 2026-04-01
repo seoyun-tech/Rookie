@@ -101,7 +101,7 @@ export default function MainPage() {
           {/* 루의 추천 - 주간 트렌딩 */}
           <ContentRow title="루의 추천" className="px-4 md:px-10">
             <div className="grid grid-cols-2 lg:grid-cols-4 lg:grid-rows-2 gap-4 md:gap-10">
-              {trending.slice(0, 5).map((item, i) => (
+              {kidsMovies.slice(0, 5).map((item, i) => (
                 <div key={item.id} className={i === 0 ? 'col-span-2 lg:row-span-2' : ''}>
                   <Card
                     size={i === 0 ? 'lg' : 'sm'}
